@@ -6,7 +6,7 @@ from PIL import Image
 st.set_page_config(page_title="PPEGuard AI", layout="centered")
 
 st.title("🦺 PPEGuard AI Scanner")
-st.write("Upload or capture an image to check PPE compliance.")
+st.write("Take a photo to check PPE compliance.")
 
 model = tf.keras.models.load_model("keras_model.h5")
 
@@ -19,10 +19,9 @@ labels = [
 image_file = st.camera_input("Take a PPE photo")
 
 if image_file is not None:
-
-```
 image = Image.open(image_file).convert("RGB")
 
+```
 st.image(image, caption="Captured Image")
 
 image = image.resize((224, 224))
@@ -42,7 +41,6 @@ confidence = float(prediction[0][index]) * 100
 result = labels[index]
 
 st.subheader(f"Prediction: {result}")
-
 st.write(f"Confidence: {confidence:.2f}%")
 
 if result == "Complete PPE" and confidence >= 80:
