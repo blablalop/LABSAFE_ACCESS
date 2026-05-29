@@ -19,32 +19,32 @@ labels = [
 image_file = st.camera_input("Take a PPE photo")
 
 if image_file is not None:
-image = Image.open(image_file).convert("RGB")
+    image = Image.open(image_file).convert("RGB")
 
-```
-st.image(image, caption="Captured Image")
+    st.image(image, caption="Captured Image")
 
-image = image.resize((224, 224))
+    image = image.resize((224, 224))
 
-image_array = np.asarray(image)
+    image_array = np.asarray(image)
 
-image_array = image_array.astype(np.float32) / 255.0
+    image_array = image_array.astype(np.float32) / 255.0
 
-image_array = np.expand_dims(image_array, axis=0)
+    image_array = np.expand_dims(image_array, axis=0)
 
-prediction = model.predict(image_array)
+    prediction = model.predict(image_array)
 
-index = np.argmax(prediction)
+    index = np.argmax(prediction)
 
-confidence = float(prediction[0][index]) * 100
+    confidence = float(prediction[0][index]) * 100
 
-result = labels[index]
+    result = labels[index]
 
-st.subheader(f"Prediction: {result}")
-st.write(f"Confidence: {confidence:.2f}%")
+    st.subheader(f"Prediction: {result}")
 
-if result == "Complete PPE" and confidence >= 80:
-    st.success("✅ ACCESS GRANTED")
-else:
-    st.error("❌ ACCESS DENIED")
-```
+    st.write(f"Confidence: {confidence:.2f}%")
+
+    if result == "Complete PPE" and confidence >= 80:
+        st.success("✅ ACCESS GRANTED")
+    else:
+        st.error("❌ ACCESS DENIED")
+
