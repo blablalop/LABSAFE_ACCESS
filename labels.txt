@@ -1,0 +1,3 @@
+0 Complete PPE
+1 Incomplete PPE
+2 Not wearing PPE
